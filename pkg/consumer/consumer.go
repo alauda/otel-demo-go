@@ -37,7 +37,7 @@ func Hello(ctx *gin.Context) {
 	defer span.End()
 
 	span.AddEvent("httpclient start", trace.WithAttributes(attribute.Int64("timestamp", time.Now().UnixMilli())))
-	resp, err := httpclient.DefaultClient().Get(otelCtx, "http://otel-demo-provider-go:8080/hello")
+	resp, err := httpclient.DefaultClient().Get(otelCtx, "http://otel-demo-provider:8080/hello")
 	if err != nil {
 		span.SetStatus(500, err.Error())
 		span.RecordError(err, trace.WithAttributes(attribute.String("errmsg", err.Error())))
@@ -75,7 +75,7 @@ func GetStudentByID(ctx *gin.Context) {
 	defer span.End()
 
 	span.AddEvent("db query start", trace.WithAttributes(attribute.Int64("timestamp", time.Now().UnixMilli())))
-	resp, err := httpclient.DefaultClient().Get(otelCtx, "http://otel-demo-provider-go:8080/stu/"+ctx.Param("id"))
+	resp, err := httpclient.DefaultClient().Get(otelCtx, "http://otel-demo-provider:8080/stu/"+ctx.Param("id"))
 	if err != nil {
 		span.SetStatus(500, err.Error())
 		span.RecordError(err, trace.WithAttributes(attribute.String("errmsg", err.Error())))

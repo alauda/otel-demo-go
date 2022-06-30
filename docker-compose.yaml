@@ -34,7 +34,7 @@ services:
     image: grafana/grafana-enterprise:9.0.1
     ports:
       - "3000:3000"
-  otel-demo-provider-go:
+  otel-demo-provider:
     image: otel-demo-provider-go
     ports:
       - "8080:8080"
@@ -67,7 +67,7 @@ services:
       interval: 5s
       timeout: 3s
       retries: 5
-  otel-demo-consumer-go:
+  otel-demo-consumer:
     image: otel-demo-consumer-go
     ports:
       - "8081:8081"
@@ -88,4 +88,4 @@ services:
 #    volumes:
 #      - ./agent/opentelemetry-javaagent.jar:/agent/opentelemetry-javaagent.jar
     depends_on:
-      - otel-demo-provider-go
+      - otel-demo-provider
