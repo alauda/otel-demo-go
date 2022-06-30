@@ -3,4 +3,4 @@ WORKDIR /demo
 COPY ./provider /demo
 EXPOSE 8080
 
-ENTRYPOINT ["./provider"]
+ENTRYPOINT ["/demo/provider"]
