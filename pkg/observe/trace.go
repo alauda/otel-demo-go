@@ -11,12 +11,12 @@ import (
 )
 
 func InitTracerProvider(serviceName string) *sdktrace.TracerProvider {
-	jaegerExporter, err := exporter.NewJaegerExporter()
+	zipkinExporter, err := exporter.NewZipkinExporter()
 	if err != nil {
 		fmt.Println(err)
 		return nil
 	}
-	tp := NewTraceProvider(serviceName, jaegerExporter)
+	tp := NewTraceProvider(serviceName, zipkinExporter)
 	otel.SetTracerProvider(tp)
 	otel.SetTextMapPropagator(b3.New(b3.WithInjectEncoding(b3.B3MultipleHeader)))
 	return tp
