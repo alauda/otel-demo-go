@@ -1,0 +1,31 @@
+name: Go
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+    
+env:
+  DEMO_TAG: $(git rev-parse --short HEAD)     
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.18
+
+    - name: Build
+      run: |
+        cd cmd/consumer
+	      GOOS=linux GOARCH=amd64 go build
+        docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_ACCOUNT }}/otel-demo-consumer-go:${{ env.DEMO_TAG }}
+        cd ../provider
+	      GOOS=linux GOARCH=amd64 go build
+	      docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_ACCOUNT }}/otel-demo-provider-go:${{ env.DEMO_TAG }
