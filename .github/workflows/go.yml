@@ -28,4 +28,4 @@ jobs:
         docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_ACCOUNT }}/otel-demo-consumer-go:${{ env.DEMO_TAG }}
         cd ../provider
         GOOS=linux GOARCH=amd64 go build
-        docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_ACCOUNT }}/otel-demo-provider-go:${{ env.DEMO_TAG }
+        docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_ACCOUNT }}/otel-demo-provider-go:${{ env.DEMO_TAG }}
